@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={roboto.className}>
-        <main className="flex items-center justify-center w-screen h-screen">
+        <main className="w-screen h-screen">
           {children}
         </main>
       
