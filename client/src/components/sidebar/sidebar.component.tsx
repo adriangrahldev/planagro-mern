@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/hooks/useAuth";
+import { useUser } from "@/contexts/UserContext";
 import {
   HomeIcon,
   MapIcon,
@@ -32,8 +32,7 @@ const routes = [
 export function Sidebar() {
   const router = useRouter();
   const [pathname, setPathname] = useState("/");
-  const { logout } = useAuth();
-
+  const { logout } = useUser();
   const handleLogout = () => {
     logout();
     router.push("/user/login");

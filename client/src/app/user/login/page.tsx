@@ -2,7 +2,7 @@
 
 import { loginAction } from "@/app/api/auth";
 import Alert from "@/components/commons/alert";
-import { useAuth } from "@/hooks/useAuth";
+import { useUser } from "@/contexts/UserContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,6 +12,9 @@ import { FormEvent, Fragment, use, useEffect, useState } from "react";
 // A3C856
 
 export default function LoginPage() {
+
+  const { user, setUser } = useUser();
+
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +23,6 @@ export default function LoginPage() {
  
   const [alerts, setAlerts] = useState([] as any);
 
-  const {login} = useAuth();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -34,7 +36,7 @@ export default function LoginPage() {
         authToken: data.token
       }
       
-      login(userObj);  
+      setUser(userObj);  
       router.push('/dashboard');
     }).catch((error:any) => {
       localStorage.clear();
