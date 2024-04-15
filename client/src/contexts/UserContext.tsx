@@ -1,14 +1,8 @@
 // contexts/UserContext.tsx
 
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { User } from "./user.interface";
 
-interface User {
-  _id: string;
-  fullName: string;
-  email: string;
-  role: string;
-  authToken: string;
-}
 
 interface UserContextData {
   user: User | null;
