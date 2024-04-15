@@ -25,7 +25,14 @@ export async function registerUser(req: Request, res: Response): Promise<void> {
         }
         const user = new User({ fullName, email, password });
         await user.save();
-        res.status(201).json({ message: '¡Usuario registrado correctamente!' });
+
+        const payload = {
+            _id: user._id
+        };
+
+        const token = jwt.sign(payload, 'PlanAgroSecret');
+
+        res.status(201).json({ message: '¡Usuario registrado correctamente!', user, token });
     } catch (err) {
         res.status(500).json(err);
     }
@@ -50,7 +57,7 @@ export async function loginUser(req: Request, res: Response): Promise<void> {
         };
 
         const token = jwt.sign(payload, 'PlanAgroSecret');
-        res.json({ token });
+        res.json({ token, user });
     } catch (err) {
         res.status(500).json(err);
     }
