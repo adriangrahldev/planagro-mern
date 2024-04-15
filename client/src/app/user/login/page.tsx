@@ -2,10 +2,11 @@
 
 import { loginAction } from "@/app/api/auth";
 import Alert from "@/components/commons/alert";
+import { useAuth } from "@/hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, Fragment, useEffect, useState } from "react";
+import { FormEvent, Fragment, use, useEffect, useState } from "react";
 
 // 594A42
 // A3C856
@@ -19,12 +20,21 @@ export default function LoginPage() {
  
   const [alerts, setAlerts] = useState([] as any);
 
+  const {login} = useAuth();
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
    
     loginAction({email,password}).then((data:any) => {
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.data);
+      const userObj = {
+        _id: data.user._id,
+        fullName: data.user.fullName,
+        email: data.user.email,
+        role: data.user.role,
+        authToken: data.token
+      }
+      
+      login(userObj);  
       router.push('/dashboard');
     }).catch((error:any) => {
       localStorage.clear();
