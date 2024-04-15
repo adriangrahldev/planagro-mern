@@ -21,18 +21,20 @@ const routes = [
   {
     name: "Campos",
     icon: MapIcon,
-    path: "/fields",
+    path: "/dashboard/fields",
   },
   {
     name: "Actividades",
     icon: ListBulletIcon,
-    path: "/activities",
+    path: "/dsahboard/activities",
   },
 ];
 export function Sidebar() {
+  
   const router = useRouter();
   const [pathname, setPathname] = useState("/");
   const { logout } = useUser();
+
   const handleLogout = () => {
     logout();
     router.push("/user/login");
