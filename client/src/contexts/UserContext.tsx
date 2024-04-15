@@ -1,7 +1,7 @@
 // contexts/UserContext.tsx
 
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { User } from "./user.interface";
+import { User } from "./user.data";
 
 
 interface UserContextData {
