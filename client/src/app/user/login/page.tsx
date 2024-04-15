@@ -25,7 +25,7 @@ export default function LoginPage() {
     loginAction({email,password}).then((data:any) => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', data.data);
-      router.push('/dashboard')
+      router.push('/dashboard');
     }).catch((error:any) => {
       localStorage.clear();
       addAlert('error', error.response.data.message);
