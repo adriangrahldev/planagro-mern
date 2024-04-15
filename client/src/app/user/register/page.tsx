@@ -15,10 +15,15 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isPasswordMatch, setIsPasswordMatch] = useState(false);
+
+  const [errors, setErrors] = useState([] as any);
 
   const router = useRouter();
 
+
   const [alerts, setAlerts] = useState([] as any);
+
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -38,6 +43,16 @@ export default function RegisterPage() {
   const addAlert = (type: string, message: string) => {
     setAlerts([...alerts, { type, message }]);
   };
+
+
+  useEffect(() => {
+    
+    if(password === confirmPassword){
+      setIsPasswordMatch(true);
+    } else {
+      setIsPasswordMatch(false);
+    }
+  }, [password, confirmPassword]);
 
   return (
     <Fragment>
@@ -59,7 +74,7 @@ export default function RegisterPage() {
           </span>
         </div>
         <form
-          className="bg-[#f1e9e5] p-4 rounded-lg w-96 shadow-sm"
+          className="bg-[#f1e9e5] p-4 rounded-lg w-96 shadow-sm px-10"
           onSubmit={handleSubmit}
         >
           <div className="text-3xl font-semibold tracking-wider mb-4">
@@ -111,6 +126,11 @@ export default function RegisterPage() {
               onChange={(e) => setPassword(e.target.value)}
 			  required
             />
+            {
+              !isPasswordMatch && password.length > 0  && confirmPassword.length > 0  &&(
+                <p className="text-green-500 text-sm">Las contraseñas coinciden</p>
+              )
+            }
           </div>
           <div className="flex flex-col mb-4 gap-1">
             <label
@@ -129,6 +149,11 @@ export default function RegisterPage() {
               onChange={(e) => setConfirmPassword(e.target.value)}
 			  required
             />
+            {
+              !isPasswordMatch && password.length > 0  && confirmPassword.length > 0  &&(
+                <p className="text-green-500 text-sm">Las contraseñas coinciden</p>
+              )
+            }
           </div>
           <div className="flex justify-between items-center">
             <input
