@@ -2,16 +2,7 @@
 
 import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 
-interface Actividad {
-	_id: string;
-	titulo: string;
-	campo: {
-		_id: string;
-		nombre: string;
-	},
-	fecha: string;
 
-}
 
 export default function HomePage() {
 
