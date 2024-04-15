@@ -1,15 +1,17 @@
 import { Field } from "@/interfaces/field.interface";
+import { MinusCircleIcon } from "@heroicons/react/20/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 export const FieldsTable = ({fields}:{fields:Field[]}) => {
     return (
-        <table>
-            <thead>
+        <table className="w-full text-left">
+            <thead className="text-gray-500">
                 <tr>
-                    <th>Name</th>
-                    <th>Surface</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
-                    <th>Created By</th>
+                    <th>Nombre</th>
+                    <th>Superficie</th>
+                    <th>Latitud</th>
+                    <th>Longitud</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,9 +21,23 @@ export const FieldsTable = ({fields}:{fields:Field[]}) => {
                         <td>{field.surface}</td>
                         <td>{field.latitude}</td>
                         <td>{field.longitude}</td>
-                        <td>{field.createdBy}</td>
+                        <td>
+                            <button className="text-blue-500">Editar</button>
+                            <button className="text-red-500">Eliminar</button>
+                        </td>
                     </tr>
                 ))}
+                {
+                    fields.length === 0 && (
+                        <tr>
+                            <td colSpan={5} className="text-center border-t text-red-800"> 
+                                <div className="py-2">
+                                    <ExclamationCircleIcon className="inline" width={30}></ExclamationCircleIcon> No hay campos registrados
+                                </div>
+                            </td>
+                        </tr>
+                    )
+                }
             </tbody>
         </table>
     )
