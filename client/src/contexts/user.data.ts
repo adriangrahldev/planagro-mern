@@ -5,3 +5,8 @@ export interface User {
     role: string;
     authToken: string;
 }
+
+
+export const getRoleDisplay = (role: string) => {
+    return role === "admin" ? "Administrador" : "Gerente";
+}
