@@ -1,0 +1,6 @@
+.map-container {
+    height: 300px;
+}
+.mapboxgl-control-container{
+    display: none;
+}
