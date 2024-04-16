@@ -36,8 +36,8 @@ import { useEffect, useState } from "react";
     <div className="bg-green-100 p-4">
       <div className="flex items-start justify-between">
         <h1 className="text-xl font-semibold mb-4">Campos</h1>
-        <Link href="/dashboard/fields/create">
-          <PlusCircleIcon width={24}/>
+        <Link href="/dashboard/fields/create" className="flex items-center gap-1 p-1 rounded-md bg-green-300 shadow-md">
+          <PlusCircleIcon width={24}/> Agregar campo
         </Link>
       </div>
 
