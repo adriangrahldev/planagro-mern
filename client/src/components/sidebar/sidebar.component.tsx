@@ -60,7 +60,7 @@ export function Sidebar() {
   }, [currentPath]);
 
   return (
-    <div className="w-56 bg-green-200 rounded-tl-md rounded-bl-md shadow-md flex flex-col">
+    <div className="w-56 bg-green-200 rounded-tl-md rounded-bl-md shadow-lg flex flex-col">
       <div
         id="logo"
         className="flex items-center justify-center gap-2 text-xl px-2 pt-4 mb-10"
