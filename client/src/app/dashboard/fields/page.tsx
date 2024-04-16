@@ -23,8 +23,8 @@ import { useEffect, useState } from "react";
 
   const fetchFields = async () => {
     try {
-      
-      const fields = await FieldService.getFields(user?.authToken);
+      const authToken = user?.authToken || ''; // Provide a default value of an empty string if authToken is undefined
+      const fields = await FieldService.getFields(authToken);
       setFields(fields);
     } catch (error) {
       console.error(error);

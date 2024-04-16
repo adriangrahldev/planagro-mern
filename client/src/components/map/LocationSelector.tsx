@@ -5,14 +5,15 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 const libraries = ["places"];
 
-const LocationSelector = ({ setLatitude, setLongitude }: any) => {
+const LocationSelector = ({ latitude, longitude,  setLatitude, setLongitude, readOnly=false }: any) => {
   const [marker, setMarker] = useState({ lat: 0, lng: 0 });
-
+  console.log(latitude, longitude);
+  
   const mapOptions = {
     disableDefaultUI: true,
     clickableIcons: true,
     scrollwheel: false,
-    draggable: true,
+    draggable: readOnly ? false : true,
   };
 
   const { isLoaded } = useLoadScript({
@@ -21,15 +22,24 @@ const LocationSelector = ({ setLatitude, setLongitude }: any) => {
   });
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setMarker({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+    if (latitude && longitude) {
+      setMarker({
+        lat: latitude,
+        lng: longitude,
       });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
+      
+    }else{
+      
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          setMarker({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        });
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
     }
   }, []);
 
@@ -49,7 +59,8 @@ const LocationSelector = ({ setLatitude, setLongitude }: any) => {
         mapTypeId={google.maps.MapTypeId.ROADMAP}
         mapContainerStyle={{ width: "800px", height: "300px" }}
         onClick={(e) => {
-          setMarker({ lat: e.latLng?.lat() || 0, lng: e.latLng?.lng() || 0 });
+          !readOnly ? setMarker({ lat: e.latLng?.lat() || 0, lng: e.latLng?.lng() || 0 }) : null;
+        
         }}
       >
         {

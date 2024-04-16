@@ -1,29 +1,40 @@
-"use client";
-
 import { FormEvent, useState } from "react";
 import LocationSelector from "../map/LocationSelector";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { Field } from "@/interfaces/field.interface";
 
-const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
-  const [name, setName] = useState("");
-  const [surface, setSurface] = useState(0);
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+interface EditFieldFormProps {
+  field: Field,
+  onSubmitEdit: (data: FormEvent) => void;
+}
 
-  const onSubmitLocal = (data: FormEvent) => {
+const EditFieldForm = ({
+  field,
+  onSubmitEdit,
+}: EditFieldFormProps) => {
+  
+  const [fieldName, setFieldName] = useState(field.name);
+  const [fieldSurface, setFieldSurface] = useState(field.surface);
+  const [fieldLatitude, setFieldLatitude] = useState(field.latitude);
+  const [fieldLongitude, setFieldLongitude] = useState(field.longitude);
+
+
+  const handleSubmitEdit = (data: FormEvent) => {
     data.preventDefault();
-    if (!latitude || !longitude) {
-        alert("Por favor, selecciona una ubicación en el mapa");
-    }else{
-        onSubmit(data);
+    if (!fieldLatitude || !fieldLongitude) {
+      alert("Por favor, selecciona una ubicación en el mapa");
+    } else {
+      onSubmitEdit(data);
     }
-
-
   };
 
   return (
-    <form className="create-field-form flex flex-col gap-2" onSubmit={(e) => {onSubmitLocal(e)}}>
-      
+    <form
+      className="edit-field-form flex flex-col gap-2"
+      onSubmit={(e) => {
+        handleSubmitEdit(e);
+      }}
+    >
       <div className="flex gap-4">
       <div className="flex flex-col">
         <label htmlFor="name" className="font-semibold">
@@ -33,8 +44,8 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
           type="text"
           id="name"
           name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={fieldName}
+          onChange={(e) => setFieldName(e.target.value)}
           className="bg-gray-100 border border-gray-300 rounded-md p-1 px-2 w-96"
           placeholder="Nombre del campo"
           required
@@ -48,8 +59,8 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
           type="number"
           id="surface"
           name="surface"
-          value={surface}
-          onChange={(e) => setSurface(parseFloat(e.target.value || ""))}
+          value={fieldSurface}
+          onChange={(e) => setFieldSurface(parseFloat(e.target.value || ""))}
           className="bg-gray-100 border border-gray-300 rounded-md p-1 px-2 w-52"
           placeholder="Superficie del campo"
           step="0.01"
@@ -63,11 +74,14 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
         <label htmlFor="latitude" className="font-semibold">
           Ubicación
         </label>
-        <input type="text" name="longitude" hidden value={longitude} />
-        <input type="text" name="latitude" hidden value={latitude} />
+        <input type="text" name="longitude" hidden value={fieldLongitude} />
+        <input type="text" name="latitude" hidden value={fieldLatitude} />
         <LocationSelector
-          setLatitude={setLatitude}
-          setLongitude={setLongitude}
+          latitude={fieldLatitude}
+          longitude={fieldLongitude}
+          setLatitude={setFieldLatitude}
+          setLongitude={setFieldLongitude}
+          readOnly={false}
         />
       </div>
       <div>
@@ -75,11 +89,11 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
           type="submit"
           className="bg-green-500 flex  text-white p-2 rounded-md px-4 gap-2"
         >
-          <CheckCircleIcon width={24} /> Guardar
+          <CheckCircleIcon width={24} /> Actualizar
         </button>
       </div>
     </form>
   );
 };
 
-export default CreateFieldForm;
+export default EditFieldForm;

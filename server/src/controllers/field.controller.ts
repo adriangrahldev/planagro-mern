@@ -16,7 +16,7 @@ export async function getAllFields(req: Request|any, res: Response): Promise<voi
 // Obtener un campo por ID
 export async function getFieldById(req: Request, res: Response): Promise<void> {
     try {
-        const field = await Field.findOne({_id: req.params._id});
+        const field = await Field.findOne({_id: req.params.id});
         res.json(field);
     } catch (err) {
         res.status(500).json(err);
@@ -36,16 +36,16 @@ export async function createField(req: Request|any, res: Response): Promise<void
         res.status(400).json(err);
     }
 }
-
 // Actualizar un campo existente por ID
 export async function updateField(req: Request, res: Response): Promise<void> {
-    const field = res.locals.field;
-    Object.assign(field, req.body);
     try {
-        const updatedField = await field.save();
-        res.json(updatedField);
+        const field = await Field.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!field) {
+            res.status(404).json();
+        }
+        res.status(200).json(field);
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json(err);
     }
 }
 

@@ -1,6 +1,7 @@
 'use client'
 
-import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { ChevronRightIcon, EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 
 
@@ -30,7 +31,13 @@ export default function HomePage() {
 			</div>
 			<hr className="border-green-600" />
 			<div className="bg-green-200 p-2 gap-2 flex flex-col rounded-md">
-				<h2 className="text-lg font-semibold">Próximas actividades</h2>
+				<div className="flex justify-between">				
+					<h2 className="text-lg font-semibold">Próximas actividades</h2>
+					<Link href={"/dashboard/activities"} className="underline flex items-center gap-2">
+						Ver todas
+						<ChevronRightIcon className="h-4 w-4"/>
+					</Link>
+				</div>
 				<div className="bg-white rounded-md">
 					<table className="w-full text-left">
 						<thead>
