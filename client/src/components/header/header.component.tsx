@@ -8,10 +8,10 @@ export function Header() {
   const {user} = useUser();
 
   return (
-    <div className="w-full bg-white h-20 flex items-center justify-end px-4 rounded-tr-md rounded-br-md shadow-lg">
+    <div className="w-full bg-green-100 h-20 flex items-center justify-end px-4 rounded-tr-md rounded-br-md shadow-lg">
       {user && (
-        <div className="flex items-center gap-2 px-4 py-1 bg-[#facaca] rounded-md">
-          <div className="w-10 h-10 bg-[#c4c4c4] rounded-full border border-black flex items-center justify-center">
+        <div className="flex items-center gap-2 px-4 py-1 bg-green-300 rounded-md shadow-sm">
+          <div className="w-10 h-10 bg-white rounded-full border border-gray-400 flex items-center justify-center">
             {user.fullName?.charAt(0)}
           </div>
           <div className="flex flex-col">
