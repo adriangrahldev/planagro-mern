@@ -1,6 +1,5 @@
 import { Field } from "@/interfaces/field.interface";
-import { MinusCircleIcon } from "@heroicons/react/20/solid";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { ExclamationCircleIcon, EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 export const FieldsTable = ({fields}:{fields:Field[]}) => {
     return (
@@ -22,8 +21,18 @@ export const FieldsTable = ({fields}:{fields:Field[]}) => {
                         <td>{field.latitude}</td>
                         <td>{field.longitude}</td>
                         <td>
-                            <button className="text-blue-500">Editar</button>
-                            <button className="text-red-500">Eliminar</button>
+                            <div className="flex gap-2">
+
+                                <button className="bg-green-400 p-2 rounded-full">
+                                    <EyeIcon className="h-4 w-4"/>
+                                </button>
+                                <button className="bg-green-200 p-2 rounded-full">
+                                    <PencilIcon className="h-4 w-4"/>
+                                </button>
+                                <button className="p-2 border-green-200 border rounded-full">
+                                    <TrashIcon className="h-4 w-4"/>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 ))}
