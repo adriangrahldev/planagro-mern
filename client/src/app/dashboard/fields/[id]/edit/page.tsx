@@ -58,7 +58,17 @@ const EditFieldPage = () => {
     return <Loading />;
   }
 
-  return <EditFieldForm onSubmitEdit={onSubmitEdit} field={field} />;
+  return(
+    <div className="bg-gray-50 rounded p-4 shadow">
+    <div className="flex items-start justify-between">
+      <h1 className="text-xl font-semibold mb-4">Crear campo</h1>
+    </div>
+    <hr />
+    <div className="p-2  rounded-md">
+      <EditFieldForm onSubmitEdit={onSubmitEdit} field={field}/>
+    </div>
+  </div>
+  )
 };
 
 export default EditFieldPage;
