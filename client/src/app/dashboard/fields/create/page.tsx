@@ -1,10 +1,19 @@
 "use client"
 import CreateFieldForm from "@/components/fields/CreateFieldForm";
+import { useUser } from "@/contexts/UserContext";
+import FieldService from "@/services/FieldService";
 import { CheckCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
 const CreateFieldPage = () => {
+  
+  const router = useRouter();
+  
+  const {user} = useUser();
+
+
   const onSubmit = (event: FormEvent) => {
     const data = new FormData(event.target as HTMLFormElement);
     const name = data.get("name") as string;
@@ -19,17 +28,15 @@ const CreateFieldPage = () => {
       longitude,
     };
 
-    axios.post(`/api/fields`, field,{
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    }).then((response) => {
+    FieldService.createField(field, user?.authToken || "").then((data) => {
+      if (data) {
+        router.back(); 
+      }
     }).catch((error) => {
       console.error(error);
-    });
+    })
   };
-  
+
   return (
     <div className="bg-green-100 p-4">
       <div className="flex items-start justify-between">

@@ -4,7 +4,6 @@ import Field from '../models/field.model';
 // Ontener todos los campos
 export async function getAllFields(req: Request|any, res: Response): Promise<void> {
     const user = req.user;
-    console.log(user);
     
     try {
         const fields = await Field.find({createdBy: user.userId});
@@ -25,8 +24,11 @@ export async function getFieldById(req: Request, res: Response): Promise<void> {
 }
 
 // Crear una nuevo campo
-export async function createField(req: Request, res: Response): Promise<void> {
+export async function createField(req: Request|any, res: Response): Promise<void> {
+    const user = req.user;
+
     const field = new Field(req.body);
+    field.createdBy = user.userId;
     try {
         const newField = await field.save();
         res.status(201).json(newField);
