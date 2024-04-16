@@ -1,49 +1,66 @@
 "use client";
 
-import { useLoadScript, GoogleMap } from "@react-google-maps/api";
-import { useMemo } from "react";
+import React, { useEffect, useState } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-const mapStyles = {
-  width: "100%",
-  height: "50%",
-};
+const libraries = ["places"];
 
-const LocationSelector = () => {
-  const libraries = useMemo(() => ["places"], []);
+const LocationSelector = ({ setLatitude, setLongitude }: any) => {
+  const [marker, setMarker] = useState({ lat: 0, lng: 0 });
 
-  const mapCenter = useMemo(
-    () => ({ lat: 27.672932021393862, lng: 85.31184012689732 }),
-    []
-  );
-
-  const mapOptions = useMemo<google.maps.MapOptions>(
-    () => ({
-      disableDefaultUI: true,
-      clickableIcons: true,
-      scrollwheel: false,
-    }),
-    []
-  );
+  const mapOptions = {
+    disableDefaultUI: true,
+    clickableIcons: true,
+    scrollwheel: false,
+    draggable: true,
+  };
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCM9ZufiFwcSQ3s4DX8X4GUl42AgD1vfQo",
+    googleMapsApiKey: "AIzaSyAwHhg92jVfj3JYfvvw7Qr5fNKXdMFfl4I",
     libraries: libraries as any,
   });
 
-  if (!isLoaded) return <p>Loading...</p>;
-  return (
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setMarker({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }, []);
 
-  <div>
-    <GoogleMap
-      options={mapOptions}
-      zoom={14}
-      center={mapCenter}
-      mapTypeId={google.maps.MapTypeId.ROADMAP}
-      mapContainerStyle={{ width: "800px", height: "300px" }}
-      onLoad={() => console.log("Map Component Loaded...")}
-    />
-  </div>
-  )
+  useEffect(() => {
+    setLatitude(marker.lat);
+    setLongitude(marker.lng);
+  }, [marker]);
+
+  if (!isLoaded) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <GoogleMap
+        options={mapOptions}
+        zoom={14}
+        center={marker}
+        mapTypeId={google.maps.MapTypeId.ROADMAP}
+        mapContainerStyle={{ width: "800px", height: "300px" }}
+        onClick={(e) => {
+          setMarker({ lat: e.latLng?.lat() || 0, lng: e.latLng?.lng() || 0 });
+        }}
+      >
+        {
+            marker.lat && marker.lng && (
+                <Marker position={marker} />
+            )
+        }
+
+      </GoogleMap>
+    </div>
+  );
 };
 
 export default LocationSelector;
