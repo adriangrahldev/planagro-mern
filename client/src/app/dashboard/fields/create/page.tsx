@@ -1,25 +1,46 @@
-import CreateFieldForm from "@/components/fields/CreateFieldForm"
+"use client"
+import CreateFieldForm from "@/components/fields/CreateFieldForm";
 import { CheckCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
-
+import axios from "axios";
+import { FormEvent } from "react";
 
 const CreateFieldPage = () => {
+  const onSubmit = (event: FormEvent) => {
+    const data = new FormData(event.target as HTMLFormElement);
+    const name = data.get("name") as string;
+    const surface = parseFloat(data.get("surface") as string);
+    const latitude = parseFloat(data.get("latitude") as string);
+    const longitude = parseFloat(data.get("longitude") as string);
 
-    return (
-        <div className="bg-green-100 p-4">
+    const field = {
+      name,
+      surface,
+      latitude, 
+      longitude,
+    };
+
+    axios.post(`/api/fields`, field,{
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    }).then((response) => {
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
+  
+  return (
+    <div className="bg-green-100 p-4">
       <div className="flex items-start justify-between">
         <h1 className="text-xl font-semibold mb-4">Crear campo</h1>
-        {/* <button className="flex items-center gap-1 p-1 rounded-md bg-green-300 shadow-md px-4">
-          <CheckCircleIcon width={24}/> Guardar
-        </button> */}
       </div>
-        <hr />
+      <hr />
       <div className="p-2  rounded-md">
-        <CreateFieldForm />
-      </div>      
-
+        <CreateFieldForm onSubmit={onSubmit}/>
+      </div>
     </div>
-    )
-
+  );
 }
 
 export default CreateFieldPage;
