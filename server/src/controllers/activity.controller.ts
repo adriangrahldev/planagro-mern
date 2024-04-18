@@ -43,10 +43,13 @@ export async function updateActivity(req: Request, res: Response): Promise<void>
 
 // Eliminar una actividad existente opor ID
 export async function deleteActivity(req: Request, res: Response): Promise<void> {
-    const activity = res.locals.activity;
     try {
-        await activity.remove();
-        res.json({ message: 'Deleted activity' });
+        const deletedActivity = await Activity.findOneAndDelete({ _id: req.params.id });
+        if (!deletedActivity) {
+            res.status(404).json({ message: 'Activity not found' });
+        }else{
+            res.json({ message: 'Deleted activity' });
+        }
     } catch (err) {
         res.status(500).json(err);
     }
