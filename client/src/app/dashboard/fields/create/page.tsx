@@ -2,8 +2,6 @@
 import CreateFieldForm from "@/components/fields/CreateFieldForm";
 import { useUser } from "@/contexts/UserContext";
 import FieldService from "@/services/FieldService";
-import { CheckCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
