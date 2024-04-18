@@ -17,18 +17,18 @@ const routes = [
     icon: HomeIcon,
     path: "/dashboard",
     activators: [
-      "/dashboard",
+      "",
     ]
   },
   {
     name: "Campos",
     icon: MapIcon,
-    path: "/dashboard/fields",
+    path: "/dashboard/fields/",
     activators: [
-      "/dashboard/fields",
-      "/dashboard/fields/create",
-      "/dashboard/fields/:id",
-      "/dashboard/fields/:id/edit",
+      "/fields",
+      "/fields/create",
+      "/fields/*",
+      "/fields/*/edit",
     ]
   },
   {
@@ -36,10 +36,10 @@ const routes = [
     icon: ListBulletIcon,
     path: "/dashboard/activities",
     activators: [
-      "/dashboard/activities",
-      "/dashboard/activities/create",
-      "/dashboard/activities/:id",
-      "/dashboard/activities/:id/edit",
+      "/activities",
+      "/activities/create",
+      "/activities/*",
+      "/activities/*/edit",
     ]
   },
 ];
@@ -72,22 +72,22 @@ export function Sidebar() {
       </div>
       <div className="flex-1 flex flex-col">
         <div>
-          <ul className="flex flex-col gap-2 px-4">
-            {
-              routes.map((route, index) => (
-                <li key={index}>
-                  <Link href={route.path} className={`flex items-center gap-2 p-2 rounded-md hover:bg-green-300 ${
-                        route.activators.includes(currentPath) ? "bg-green-300" : ""
-                      }`}>
-                    
-                      <route.icon width={24} />
-                      <span>{route.name}</span>
-                    
-                  </Link>
-                </li>
-              ))
-            }
-          </ul>
+        <ul className="flex flex-col gap-2 px-4">
+    {
+      routes.map((route, index) => (
+        <li key={index}>
+          <Link href={route.path} className={`flex items-center gap-2 p-2 rounded-md hover:bg-green-300 ${
+            route.activators.includes(currentPath.split('/dashboard')[1]) || currentPath.includes("/edit") && currentPath.includes("/fields") ? "bg-green-300" : ""
+          }`}>
+            
+              <route.icon width={24} />
+              <span>{route.name}</span>
+            
+          </Link>
+        </li>
+      ))
+    }
+  </ul>
         </div>
         <div className="flex-1 flex items-end justify-center py-4">
           <button
