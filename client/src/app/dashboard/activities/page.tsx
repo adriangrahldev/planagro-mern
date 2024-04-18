@@ -28,6 +28,15 @@ const ActivitiesPage = () => {
     }
   };
 
+  const handleDelete = async (activityId: string) => {
+    try {
+      await ActivityService.deleteActivity(activityId,user?.authToken || "");
+      setActivities(activities.filter((activity) => activity._id !== activityId));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="bg-green-100 p-4">
       <div className="flex items-start justify-between">
@@ -41,7 +50,7 @@ const ActivitiesPage = () => {
       </div>
 
       <div className="p-2 bg-white rounded-md">
-        <ActivitiesTable activities={activities} />
+        <ActivitiesTable activities={activities} handleDelete={handleDelete} />
       </div>
     </div>
   );
