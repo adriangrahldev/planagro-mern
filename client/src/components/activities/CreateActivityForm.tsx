@@ -14,7 +14,7 @@ const CreateActivityForm = ({ onSubmit }: { onSubmit: CallableFunction }) => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [status, setStatus] = useState("");
   const [targetField, setTargetField] = useState("");
 
