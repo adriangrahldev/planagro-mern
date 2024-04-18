@@ -27,8 +27,8 @@ const routes = [
     activators: [
       "/fields",
       "/fields/create",
-      "/fields/*",
-      "/fields/*/edit",
+      "/fields/[id]",
+      "/fields/[id]]/edit",
     ]
   },
   {
@@ -38,8 +38,8 @@ const routes = [
     activators: [
       "/activities",
       "/activities/create",
-      "/activities/*",
-      "/activities/*/edit",
+      "/activities/[id]",
+      "/activities/[id]]/edit",
     ]
   },
 ];
@@ -60,41 +60,47 @@ export function Sidebar() {
   }, [currentPath]);
 
   return (
-    <div className="w-56 bg-green-200 rounded-tl-md rounded-bl-md shadow-lg flex flex-col">
+    <div className="w-56 bg-green-600 rounded-tl-md rounded-bl-md shadow-lg flex flex-col">
       <div
         id="logo"
-        className="flex items-center justify-center gap-2 text-xl px-2 pt-4 mb-10"
+        className="flex items-center justify-center gap-2 text-xl px-2 mt-6 mb-10"
       >
-        <Image src="/logo.png" alt="Plan Agro Logo" width={20} height={0} />
+        <Image src="/logo.png" alt="Plan Agro Logo" width={25} height={0} />
         <span>
           Plan<b>Agro</b>
         </span>
       </div>
       <div className="flex-1 flex flex-col">
         <div>
-        <ul className="flex flex-col gap-2 px-4">
-    {
-      routes.map((route, index) => (
-        <li key={index}>
-          <Link href={route.path} className={`flex items-center gap-2 p-2 rounded-md hover:bg-green-300 ${
-            route.activators.includes(currentPath.split('/dashboard')[1]) || currentPath.includes("/edit") && currentPath.includes("/fields") ? "bg-green-300" : ""
-          }`}>
-            
-              <route.icon width={24} />
-              <span>{route.name}</span>
-            
-          </Link>
-        </li>
-      ))
-    }
-  </ul>
+          <ul className="flex flex-col gap-2 px-4">
+            {routes.map((route, index) => (
+              <li key={index}>
+                <Link
+                  href={route.path}
+                  className={`flex text-white items-center gap-2 p-2 rounded-md hover:bg-green-200 hover:text-green-800 ${
+                    route.activators.find((activator) =>
+                      currentPath.replace('/dashboard','').includes(activator)
+                    )
+                      ? "bg-green-200 text-green-800"
+                      : ""
+                  }`}
+                >
+                  <route.icon width={24} />
+                  <span>{route.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="flex-1 flex items-end justify-center py-4">
           <button
             className="rounded-md hover:bg-white hover:shadow-lg p-2"
             onClick={() => handleLogout()}
           >
-            <Link href="/logout" className="flex gap-2">
+            <Link
+              href="/logout"
+              className="flex gap-2 bg-green-300 px-2 py-1 rounded-md text-red-600"
+            >
               <ArrowLeftEndOnRectangleIcon width={24} />
               <span>Cerrar Sesión</span>
             </Link>
