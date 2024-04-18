@@ -65,7 +65,7 @@ const EditActivityPage = () => {
   return(
     <div className="bg-gray-50 rounded p-4 shadow">
     <div className="flex items-start justify-between">
-      <h1 className="text-xl font-semibold mb-4">Crear campo</h1>
+      <h1 className="text-xl font-semibold mb-4">Modificar actividad</h1>
     </div>
     <hr />
     <div className="p-2  rounded-md">
