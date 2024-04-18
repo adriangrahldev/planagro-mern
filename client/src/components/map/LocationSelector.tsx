@@ -5,7 +5,15 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 const libraries = ["places"];
 
-const LocationSelector = ({ latitude, longitude,  setLatitude, setLongitude, readOnly=false }: any) => {
+const LocationSelector = ({ latitude, longitude,  setLatitude, setLongitude, readOnly=false }:
+  {
+    latitude: string;
+    longitude: string;
+    setLatitude?: (latitude: string) => void;
+    setLongitude?: (longitude: string) => void;
+    readOnly?: boolean;
+  }
+) => {
   const [marker, setMarker] = useState({ lat: 0, lng: 0 });
   console.log(latitude, longitude);
   
@@ -24,8 +32,8 @@ const LocationSelector = ({ latitude, longitude,  setLatitude, setLongitude, rea
   useEffect(() => {
     if (latitude && longitude) {
       setMarker({
-        lat: latitude,
-        lng: longitude,
+        lat: Number.parseFloat(latitude),
+        lng: Number.parseFloat(longitude),
       });
       
     }else{
@@ -44,8 +52,10 @@ const LocationSelector = ({ latitude, longitude,  setLatitude, setLongitude, rea
   }, []);
 
   useEffect(() => {
-    setLatitude(marker.lat);
-    setLongitude(marker.lng);
+    if(!readOnly){
+      setLatitude(marker.lat);
+      setLongitude(marker.lng);
+    }
   }, [marker]);
 
   if (!isLoaded) return <p>Loading...</p>;
