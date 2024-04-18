@@ -1,4 +1,5 @@
 import { Activity } from "@/interfaces/activity.interface";
+import { Field } from "@/interfaces/field.interface";
 import { ExclamationCircleIcon, EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -27,9 +28,15 @@ export const ActivitiesTable = ({activities}:{activities:Activity[]}) => {
                     <tr key={index}>
                         <td>{activity.title}</td>
                         <td>{activity.description}</td>
-                        <td>{activity.date}</td>
-                        <td>{activity.status}</td>
-                        <td>{activity.targetField}</td>
+                        <td>
+                            {new Date(activity.date.split("T")[0]+" 12:00:00").toLocaleDateString()}
+                        </td>
+                        <td>
+                            <span className={`px-2 py-1 text-gray-600 ${activity.status === 'pending' ? 'bg-yellow-200' : 'bg-green-400'} text-sm font-semibold rounded-md shadow`}>
+                                {activity.status === 'pending' ? 'PENDIENTE' : 'COMPLETADO'}
+                            </span>                        
+                        </td>
+                        <td>{(activity.targetField as Field)?.name}</td>
                         <td>
                             <div className="flex gap-2">
 
