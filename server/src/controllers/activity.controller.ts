@@ -4,7 +4,7 @@ import Activity from '../models/activity.model';
 // Obtener todas las actividades
 export async function getAllActivities(req: Request, res: Response): Promise<void> {
     try {
-        const activities = await Activity.find();
+        const activities = await Activity.find().populate('targetField');
         res.json(activities);
     } catch (err) {
         res.status(500).json(err);
