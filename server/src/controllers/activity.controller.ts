@@ -13,7 +13,7 @@ export async function getAllActivities(req: Request, res: Response): Promise<voi
 
 // Obtener una actividad por ID
 export async function getActivityById(req: Request, res: Response): Promise<void> {
-    const activity = await Activity.findById(req.params.id);
+    const activity = await Activity.findById(req.params.id).populate('targetField');
     res.status(200).json(activity);
 }
 
