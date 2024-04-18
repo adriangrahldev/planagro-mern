@@ -13,7 +13,8 @@ export async function getAllActivities(req: Request, res: Response): Promise<voi
 
 // Obtener una actividad por ID
 export async function getActivityById(req: Request, res: Response): Promise<void> {
-    res.json(res.locals.activity);
+    const activity = await Activity.findById(req.params.id);
+    res.status(200).json(activity);
 }
 
 // Crear nueva actividad
@@ -29,13 +30,14 @@ export async function createActivity(req: Request, res: Response): Promise<void>
 
 // Actualizar una actividad existente por ID
 export async function updateActivity(req: Request, res: Response): Promise<void> {
-    const activity = res.locals.activity;
-    Object.assign(activity, req.body);
     try {
-        const updatedActivity = await activity.save();
-        res.json(updatedActivity);
+        const activity = await Activity.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!activity) {
+            res.status(404).json();
+        }
+        res.status(200).json(activity);
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json(err);
     }
 }
 
