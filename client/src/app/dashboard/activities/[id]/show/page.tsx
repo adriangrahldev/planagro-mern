@@ -34,8 +34,6 @@ return (
         <div className="flex items-start justify-between">
             <h1 className="text-xl font-semibold mb-4">{activity.title}</h1>
             <div className="flex gap-4">
-            
-             
                 <a href={`/dashboard/activities/${activity._id}/edit`} className="text-blue-500 flex gap-2 items-center">
                     <PencilIcon className="h-4 w-4" />
                     Editar actividad
