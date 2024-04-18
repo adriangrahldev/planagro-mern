@@ -7,8 +7,8 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
   const [name, setName] = useState("");
   const [surface, setSurface] = useState(0);
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
   const onSubmitLocal = (data: FormEvent) => {
     data.preventDefault();
@@ -63,8 +63,8 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
         <label htmlFor="latitude" className="font-semibold">
           Ubicación
         </label>
-        <input type="text" name="longitude" hidden value={longitude} />
-        <input type="text" name="latitude" hidden value={latitude} />
+        <input type="text" name="longitude" hidden value={longitude} onChange={(e)=> setLongitude(e.target.value)} />
+        <input type="text" name="latitude" hidden value={latitude} onChange={(e)=> setLongitude(e.target.value)}/>
         <LocationSelector
           setLatitude={setLatitude}
           setLongitude={setLongitude}
