@@ -94,16 +94,11 @@ export function Sidebar() {
         </div>
         <div className="flex-1 flex items-end justify-center py-4">
           <button
-            className="rounded-md hover:bg-white hover:shadow-lg p-2"
+            className="rounded-md hover:shadow-lg p-2 flex gap-2 bg-green-300 px-2 py-1 text-red-600"
             onClick={() => handleLogout()}
           >
-            <Link
-              href="/logout"
-              className="flex gap-2 bg-green-300 px-2 py-1 rounded-md text-red-600"
-            >
               <ArrowLeftEndOnRectangleIcon width={24} />
               <span>Cerrar Sesión</span>
-            </Link>
           </button>
         </div>
       </div>
