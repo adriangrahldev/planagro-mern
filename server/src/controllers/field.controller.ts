@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Field from '../models/field.model';
+import Activity from '../models/activity.model';
 
 // Ontener todos los campos
 export async function getAllFields(req: Request|any, res: Response): Promise<void> {
@@ -52,10 +53,14 @@ export async function updateField(req: Request, res: Response): Promise<void> {
 // Eliminar un campo existente por ID
 export async function deleteField(req: Request, res: Response): Promise<void> {
 
-    const field = await Field.findByIdAndDelete(req.params.id);
+    const field = await Field.findOne({_id: req.params.id});
     if (!field) {
         res.status(404).json();
     }
+    const activities = await Activity.find({targetField: req.params.id});
+    activities.forEach(async (activity) => {
+        await activity.deleteOne();
+    });
+    await field?.deleteOne();
     res.status(200).json(field);
-
 }
