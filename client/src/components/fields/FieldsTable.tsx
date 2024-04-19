@@ -2,12 +2,8 @@ import { Field } from "@/interfaces/field.interface";
 import { ExclamationCircleIcon, EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-export const FieldsTable = ({fields}:{fields:Field[]}) => {
+export const FieldsTable = ({fields, handleDelete}:{fields:Field[], handleDelete: CallableFunction}) => {
 
-
-    const handleDelete = (id: string) => {
-        console.log(`Deleting field with id: ${id}`);
-    }
 
 
     return (
