@@ -30,6 +30,16 @@ import { useEffect, useState } from "react";
       console.error(error);
     }
   };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const authToken = user?.authToken || ''; // Provide a default value of an empty string if authToken is undefined
+      await FieldService.deleteField(id, authToken);
+      fetchFields();
+    } catch (error) {
+      console.error(error);
+    }
+  }
   
 
   return (
@@ -42,7 +52,7 @@ import { useEffect, useState } from "react";
       </div>
 
       <div className="p-2 bg-white rounded-md">
-        <FieldsTable fields={fields} />
+        <FieldsTable handleDelete={handleDelete} fields={fields} />
       </div>      
 
     </div>
