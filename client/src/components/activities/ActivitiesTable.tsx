@@ -10,7 +10,7 @@ export const ActivitiesTable = ({activities, handleDelete}:{activities:Activity[
     return (
         <table className="w-full text-left">
             <thead className="text-gray-500">
-                <tr>
+                <tr >
                     <th>Título</th>
                     <th>Descripción</th>
                     <th>Fecha</th>

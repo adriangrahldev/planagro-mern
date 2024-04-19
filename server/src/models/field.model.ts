@@ -1,5 +1,4 @@
 import { Schema, model, Document } from 'mongoose';
-import User  from './user.model';
 
 interface Field extends Document {
     name: string;

@@ -17,7 +17,7 @@ const routes = [
     icon: HomeIcon,
     path: "/dashboard",
     activators: [
-      "",
+      "/dashboard",
     ]
   },
   {
@@ -79,7 +79,7 @@ export function Sidebar() {
                   href={route.path}
                   className={`flex text-white items-center gap-2 p-2 rounded-md hover:bg-green-200 hover:text-green-800 ${
                     route.activators.find((activator) =>
-                      currentPath.replace('/dashboard','').includes(activator)
+                      currentPath.replace('/dashboard','').includes(activator) || currentPath === route.activators[0]
                     )
                       ? "bg-green-200 text-green-800"
                       : ""

@@ -1,13 +1,56 @@
 'use client'
 
+import { ActivitiesTable } from "@/components/activities/ActivitiesTable";
+import { useUser } from "@/contexts/UserContext";
+import { DashboardService } from "@/services/DashboardService";
 import { ChevronRightIcon, EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
+interface DashboardData {
+	fieldsCount: number;
+	activitiesCount: number;
+	nextActivities: any[];
+
+}
 
 
 export default function HomePage() {
+const { user } = useUser();
 
+	const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+
+	const getDashboardData = async () => {
+		DashboardService.getDashboardData(user?.authToken || "").then((data: DashboardData) => {
+			console.log(data);
+			setDashboardData(data);
+		}).catch((error) => {
+			console.error(error);
+		});
+
+	}
+
+	useEffect(() => {
+		if (user) {
+			getDashboardData();
+		}
+	}
+	, [user]);
 	
+	const handleDeleteActivity = async (activityId: string) => {
+		try {
+			const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/activities/${activityId}`, {
+				headers: {
+					'Authorization': `Bearer ${user?.authToken}`,
+				},
+			});
+			console.log(response.data);
+			getDashboardData();
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -17,15 +60,15 @@ export default function HomePage() {
 						Campos
 					</span>
 					<span>
-						3	
+						{dashboardData?.fieldsCount || 0}
 					</span>		
 				</div>
-				<div className="bg-green-200 p-2 flex justify-between items-center rounded-md shadow-sm">
+				<div className="bg-green-200 p-2  w-48 flex justify-between items-center rounded-md shadow-sm">
 					<span className="font-semibold">
 						Activ. Pendientes
 					</span>
 					<span>
-						8	
+						{dashboardData?.activitiesCount || 0}
 					</span>		
 				</div>
 			</div>
@@ -39,34 +82,7 @@ export default function HomePage() {
 					</Link>
 				</div>
 				<div className="bg-white rounded-md">
-					<table className="w-full text-left">
-						<thead>
-							<tr>
-								<th className="p-1">Actividad</th>
-								<th className="p-1">Campo</th>
-								<th className="p-1">Fecha</th>
-								<th className="p-1">Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td className="p-1">Actividad 1</td>
-								<td className="p-1">Campo 1</td>
-								<td className="p-1">2021-09-01</td>
-								<td className="p-1 flex gap-2">
-									<button>
-										<EyeIcon className="h-5 w-5" />
-									</button>
-									<button>
-										<PencilIcon className="h-5 w-5"/>
-									</button>
-									<button>
-										<TrashIcon className="h-5 w-5"/>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<ActivitiesTable activities={dashboardData?.nextActivities || []} handleDelete={handleDeleteActivity} />
 				</div>
 			</div>
 		</div>
