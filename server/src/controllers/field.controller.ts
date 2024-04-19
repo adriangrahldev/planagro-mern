@@ -51,11 +51,11 @@ export async function updateField(req: Request, res: Response): Promise<void> {
 
 // Eliminar un campo existente por ID
 export async function deleteField(req: Request, res: Response): Promise<void> {
-    const field = res.locals.field;
-    try {
-        await field.remove();
-        res.json({ message: 'Deleted field' });
-    } catch (err) {
-        res.status(500).json(err);
+
+    const field = await Field.findByIdAndDelete(req.params.id);
+    if (!field) {
+        res.status(404).json();
     }
+    res.status(200).json(field);
+
 }
