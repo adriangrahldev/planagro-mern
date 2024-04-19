@@ -11,29 +11,29 @@ export const ActivitiesTable = ({activities, handleDelete}:{activities:Activity[
         <table className="w-full text-left">
             <thead className="text-gray-500">
                 <tr >
-                    <th>Título</th>
-                    <th>Descripción</th>
-                    <th>Fecha</th>
-                    <th>Estado</th>
-                    <th>Campo</th>
-                    <th>Accciones</th>
+                    <th className="p-2">Título</th>
+                    <th className="p-2">Descripción</th>
+                    <th className="p-2">Fecha</th>
+                    <th className="p-2">Estado</th>
+                    <th className="p-2">Campo</th>
+                    <th className="p-2">Accciones</th>
                 </tr>
             </thead>
             <tbody>
                 {activities.map((activity, index) => (
                     <tr key={index}>
-                        <td>{activity.title}</td>
-                        <td>{activity.description}</td>
-                        <td>
+                        <td className="py-2">{activity.title}</td>
+                        <td className="py-2">{activity.description}</td>
+                        <td className="py-2">
                             {new Date(activity.date.split("T")[0]+" 12:00:00").toLocaleDateString()}
                         </td>
-                        <td>
+                        <td className="py-2">
                             <span className={`px-2 py-1 text-gray-600 ${activity.status === 'pending' ? 'bg-yellow-200' : 'bg-green-400'} text-sm font-semibold rounded-md shadow`}>
                                 {activity.status === 'pending' ? 'PENDIENTE' : 'COMPLETADO'}
                             </span>                        
                         </td>
-                        <td>{(activity.targetField as Field)?.name}</td>
-                        <td>
+                        <td className="py-2">{(activity.targetField as Field)?.name}</td>
+                        <td className="py-2">
                             <div className="flex gap-2">
 
                                 <Link href={`/dashboard/activities/${activity._id}/show`} className="bg-green-400 p-2 rounded-full">
