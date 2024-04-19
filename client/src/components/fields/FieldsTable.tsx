@@ -14,21 +14,21 @@ export const FieldsTable = ({fields}:{fields:Field[]}) => {
         <table className="w-full text-left">
             <thead className="text-gray-500">
                 <tr>
-                    <th>Nombre</th>
-                    <th>Superficie</th>
-                    <th>Latitud</th>
-                    <th>Longitud</th>
-                    <th>Acciones</th>
+                    <th className="p-2">Nombre</th>
+                    <th className="p-2">Superficie</th>
+                    <th className="p-2">Latitud</th>
+                    <th className="p-2">Longitud</th>
+                    <th className="p-2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {fields.map((field, index) => (
                     <tr key={index}>
-                        <td>{field.name}</td>
-                        <td>{field.surface}</td>
-                        <td>{field.latitude}</td>
-                        <td>{field.longitude}</td>
-                        <td>
+                        <td className="p-2">{field.name}</td>
+                        <td className="p-2">{field.surface}</td>
+                        <td className="p-2">{field.latitude}</td>
+                        <td className="p-2">{field.longitude}</td>
+                        <td className="p-2">
                             <div className="flex gap-2">
 
                                 <Link href={`/dashboard/fields/${field._id}/show`} className="bg-green-400 p-2 rounded-full">
