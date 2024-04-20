@@ -44,8 +44,10 @@ export default function RegisterPage() {
         router.push("/dashboard");
       })
       .catch((error: any) => {
-        localStorage.clear();
         addAlert("error", error.response.data.message);
+        setErrors(error.response.data.errors);
+        console.log(errors);
+        
       });
   };
 
@@ -138,6 +140,11 @@ export default function RegisterPage() {
             {
               !isPasswordMatch && password.length > 0  && confirmPassword.length > 0  &&(
                 <p className="text-green-500 text-sm">Las contraseñas coinciden</p>
+              )
+            }
+            {
+              errors.password && (
+                <p className="text-red-500 text-sm">{errors.password.message}</p>
               )
             }
           </div>

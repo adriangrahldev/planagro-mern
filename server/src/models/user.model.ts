@@ -11,7 +11,7 @@ interface User extends Document {
 const userSchema = new Schema<User>({
     fullName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String, required: [true, 'La contraseña es obligatoria'], minlength: [6,'Debes elegir una contraseña de al menos 6 caracteres']},
     role: { type: String, enum: ['admin', 'manager'], default: 'admin'},
 });
 
