@@ -3,7 +3,7 @@ import Field from '../models/field.model';
 import Activity from '../models/activity.model';
 
 // Ontener todos los campos
-export async function getAllFields(req: Request|any, res: Response): Promise<void> {
+export async function getAllFields(req: Request | any, res: Response): Promise<void> {
     const user = req.user;
     
     try {
