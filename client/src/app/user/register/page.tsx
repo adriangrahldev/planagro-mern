@@ -2,6 +2,7 @@
 
 import { loginAction, registerAction } from "@/app/api/auth";
 import Alert from "@/components/commons/alert";
+import { useUser } from "@/contexts/UserContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,6 +17,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
+  const { user, setUser } = useUser();
 
   const [errors, setErrors] = useState([] as any);
 
@@ -30,8 +32,15 @@ export default function RegisterPage() {
 
     registerAction({ fullName, email, password, confirmPassword })
       .then((data: any) => {
-        localStorage.setItem("token", data.token);
-        // localStorage.setItem("user", data.data);
+        const userObj = {
+          _id: data.user._id,
+          fullName: data.user.fullName,
+          email: data.user.email,
+          role: data.user.role,
+          authToken: data.token
+        }
+        
+        setUser(userObj);  
         router.push("/dashboard");
       })
       .catch((error: any) => {
