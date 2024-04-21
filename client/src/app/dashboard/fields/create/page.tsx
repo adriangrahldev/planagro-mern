@@ -16,16 +16,14 @@ const CreateFieldPage = () => {
     const data = new FormData(event.target as HTMLFormElement);
     const name = data.get("name") as string;
     const surface = parseFloat(data.get("surface") as string);
-    const latitude = parseFloat(data.get("latitude") as string);
-    const longitude = parseFloat(data.get("longitude") as string);
+    const coords = data.get("coords") as string;
 
     const field = {
       name,
       surface,
-      latitude, 
-      longitude,
+      coords: JSON.parse(coords),
     };
-
+    
     FieldService.createField(field, user?.authToken || "").then((data) => {
       if (data) {
         router.back(); 
