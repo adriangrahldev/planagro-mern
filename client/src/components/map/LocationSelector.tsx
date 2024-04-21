@@ -7,8 +7,8 @@ const libraries = ["places"];
 
 const LocationSelector = ({ latitude, longitude,  setLatitude, setLongitude, readOnly=false }:
   {
-    latitude: string;
-    longitude: string;
+    latitude?: string;
+    longitude?: string;
     setLatitude?: (latitude: string) => void;
     setLongitude?: (longitude: string) => void;
     readOnly?: boolean;
