@@ -3,19 +3,20 @@
 import { FormEvent, useState } from "react";
 import LocationSelector from "../map/LocationSelector";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import PolyLocationSelector from "../map/PolygonLocationSelector";
 
 const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
   const [name, setName] = useState("");
   const [surface, setSurface] = useState(0);
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [coords , setCoords] = useState([]);
 
   const onSubmitLocal = (data: FormEvent) => {
     data.preventDefault();
-    if (!latitude || !longitude) {
+    if (coords.length === 0) {
         alert("Por favor, selecciona una ubicación en el mapa");
     }else{
         onSubmit(data);
+        
     }
 
 
@@ -58,16 +59,21 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
           required
         />
       </div>
+      <input
+          type="hidden"
+          name="coords"
+          value={JSON.stringify(coords)}
+        />
       </div>
       <div className="flex flex-col">
         <label htmlFor="latitude" className="font-semibold">
           Ubicación
         </label>
-        <input type="text" name="longitude" hidden value={longitude} onChange={(e)=> setLongitude(e.target.value)} />
-        <input type="text" name="latitude" hidden value={latitude} onChange={(e)=> setLongitude(e.target.value)}/>
-        <LocationSelector
-          setLatitude={setLatitude}
-          setLongitude={setLongitude}
+        <PolyLocationSelector
+          coords={[]}
+          setCoords={(coords) => {
+            setCoords(coords as any);
+          }}
         />
       </div>
       <div>
