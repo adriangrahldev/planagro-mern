@@ -33,7 +33,7 @@ const EditActivityForm = ({
     setDate(new Date(activity.date).toISOString().split("T")[0]);
 
     setStatus(activity.status);
-    setTargetField(activity.targetField);
+    setTargetField((activity.targetField as Field)._id);
   }, [activity]);
 
   const handleSubmitEdit = (data: FormEvent) => {
