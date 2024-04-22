@@ -59,19 +59,17 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
           required
         />
       </div>
-      <input
-          type="hidden"
-          name="coords"
-          value={JSON.stringify(coords)}
-        />
+      <input type="text" name="coords" hidden onChange={
+          (e) => setCoords(JSON.parse(e.target.value))
+        } value={JSON.stringify(coords || "[]")}/>
       </div>
       <div className="flex flex-col">
         <label htmlFor="latitude" className="font-semibold">
           Ubicación
         </label>
         <PolyLocationSelector
-          coords={[]}
-          setCoords={(coords) => {
+          initialCoords={[]}
+          setNewCoords={(coords) => {
             setCoords(coords as any);
           }}
         />
