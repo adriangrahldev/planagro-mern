@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import LocationSelector from "../map/LocationSelector";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import PolyLocationSelector from "../map/PolygonLocationSelector";
 

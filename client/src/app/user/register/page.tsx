@@ -1,6 +1,6 @@
 "use client";
 
-import { loginAction, registerAction } from "@/app/api/auth";
+import { registerAction } from "@/app/api/auth";
 import Alert from "@/components/commons/alert";
 import { useUser } from "@/contexts/UserContext";
 import Image from "next/image";

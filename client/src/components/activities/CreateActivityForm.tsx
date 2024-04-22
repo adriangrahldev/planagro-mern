@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import LocationSelector from "../map/LocationSelector";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Field } from "@/interfaces/field.interface";
 import FieldService from "@/services/FieldService";

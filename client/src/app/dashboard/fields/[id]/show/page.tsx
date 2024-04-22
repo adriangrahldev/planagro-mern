@@ -1,13 +1,10 @@
 "use client";
 import Loading from "@/components/commons/loading";
-import LocationSelector from "@/components/map/LocationSelector";
 import PolyLocationSelector from "@/components/map/PolygonLocationSelector";
 import { useUser } from "@/contexts/UserContext";
-import { Activity } from "@/interfaces/activity.interface";
 import { Field } from "@/interfaces/field.interface";
-import ActivityService from "@/services/ActivityService";
 import FieldService from "@/services/FieldService";
-import { MapIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { PencilIcon } from "@heroicons/react/24/outline";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

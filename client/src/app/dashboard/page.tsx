@@ -3,7 +3,7 @@
 import { ActivitiesTable } from "@/components/activities/ActivitiesTable";
 import { useUser } from "@/contexts/UserContext";
 import { DashboardService } from "@/services/DashboardService";
-import { ChevronRightIcon, EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";

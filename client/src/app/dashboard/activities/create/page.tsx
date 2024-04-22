@@ -1,6 +1,5 @@
 "use client"
 import CreateActivityForm from "@/components/activities/CreateActivityForm";
-import CreateFieldForm from "@/components/fields/CreateFieldForm";
 import { useUser } from "@/contexts/UserContext";
 import ActivityService from "@/services/ActivityService";
 import { useRouter } from "next/navigation";

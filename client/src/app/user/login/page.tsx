@@ -6,7 +6,7 @@ import { useUser } from "@/contexts/UserContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, Fragment, use, useEffect, useState } from "react";
+import { FormEvent, Fragment, useState } from "react";
 
 // 594A42
 // A3C856

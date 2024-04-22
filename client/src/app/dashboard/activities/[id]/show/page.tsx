@@ -5,7 +5,7 @@ import { useUser } from "@/contexts/UserContext";
 import { Activity } from "@/interfaces/activity.interface";
 import { Field } from "@/interfaces/field.interface";
 import ActivityService from "@/services/ActivityService";
-import { MapIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { PencilIcon } from "@heroicons/react/24/outline";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

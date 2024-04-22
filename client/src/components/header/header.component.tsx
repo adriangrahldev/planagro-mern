@@ -1,7 +1,6 @@
 "use client";
 import { getRoleDisplay } from "@/contexts/user.data";
 import { useUser } from "@/contexts/UserContext";
-import { useEffect, useState } from "react";
 
 export function Header() {
 

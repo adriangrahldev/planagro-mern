@@ -1,12 +1,9 @@
 "use client";
 import EditActivityForm from "@/components/activities/EditActivityForm";
 import Loading from "@/components/commons/loading";
-import EditFieldForm from "@/components/fields/EditFieldForm";
 import { useUser } from "@/contexts/UserContext";
 import { Activity } from "@/interfaces/activity.interface";
-import { Field } from "@/interfaces/field.interface";
 import ActivityService from "@/services/ActivityService";
-import FieldService from "@/services/FieldService";
 import { useParams, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
