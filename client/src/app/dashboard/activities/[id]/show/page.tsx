@@ -70,13 +70,6 @@ return (
                     <p>
                         {(activity.targetField as Field).name} <small>({(activity.targetField as Field).surface} ha)</small>
                     </p>
-                    <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${(activity.targetField as Field).latitude},${(activity.targetField as Field).longitude}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <MapIcon className="h-6 w-6 text-blue-500" />
-                    </a>
                 </p>
             </div>
             <div className="mt-4">
