@@ -30,6 +30,8 @@ export default function RegisterPage() {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
+    
+
     registerAction({ fullName, email, password, confirmPassword })
       .then((data: any) => {
         const userObj = {
@@ -64,6 +66,17 @@ export default function RegisterPage() {
       setIsPasswordMatch(false);
     }
   }, [password, confirmPassword]);
+
+  useEffect(() => {
+    // la contraseña debe tener al menos 6 caracteres y una letra en mayuscula y un caracter especial
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
+    if(!passwordRegex.test(password) && password.length > 0){
+      setErrors({...errors, password: {message: "La contraseña debe tener al menos 6 caracteres y una letra en mayuscula"}});
+    }else{
+      setErrors({...errors, password: null});
+    }
+  }, [password]);
+
 
   return (
     <Fragment>
