@@ -82,7 +82,7 @@ const { user } = useUser();
 					</Link>
 				</div>
 				<div className="bg-white rounded-md">
-					<ActivitiesTable activities={dashboardData?.nextActivities || []} handleDelete={handleDeleteActivity} />
+					<ActivitiesTable statusFilter="all" activities={dashboardData?.nextActivities || []} handleDelete={handleDeleteActivity} />
 				</div>
 			</div>
 		</div>
