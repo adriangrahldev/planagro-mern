@@ -42,7 +42,7 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
       </div>
       <div className="flex flex-col">
         <label htmlFor="surface" className="font-semibold">
-          Superficie (ha)
+          Área (ha)
         </label>
         <input
           type="number"
@@ -51,7 +51,7 @@ const CreateFieldForm = ({onSubmit}:{onSubmit:CallableFunction  }) => {
           value={surface}
           onChange={(e) => setSurface(parseFloat(e.target.value || ""))}
           className="bg-gray-100 border border-gray-300 rounded-md p-1 px-2 w-52"
-          placeholder="Superficie del campo"
+          placeholder="Área del campo"
           step="0.01"
           pattern="^\d+(\.\d+)?$"
           title="Por favor, introduce un número entero o decimal"

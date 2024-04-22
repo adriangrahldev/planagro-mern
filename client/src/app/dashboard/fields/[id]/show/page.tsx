@@ -45,7 +45,7 @@ return (
         <div className="p-2 rounded-md">
             <div className="grid grid-cols-1 gap-6">
                 <div>
-                    <p className="text-gray-500 font-semibold">Superficie</p>
+                    <p className="text-gray-500 font-semibold">Área</p>
                     <p>{field.surface} ha.</p>
                 </div>
                 <div>

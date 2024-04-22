@@ -11,7 +11,7 @@ export const FieldsTable = ({fields, handleDelete}:{fields:Field[], handleDelete
             <thead className="text-gray-500">
                 <tr>
                     <th className="p-2">Nombre</th>
-                    <th className="p-2">Superficie</th>
+                    <th className="p-2">Área</th>
                     <th className="p-2">Fecha de creación</th>
                     <th className="p-2">Acciones</th>
                 </tr>
@@ -20,7 +20,7 @@ export const FieldsTable = ({fields, handleDelete}:{fields:Field[], handleDelete
                 {fields.map((field, index) => (
                     <tr key={index}>
                         <td className="p-2">{field.name}</td>
-                        <td className="p-2">{field.surface}</td>
+                        <td className="p-2">{field.surface} ha.</td>
                         <td className="p-2">{new Date(field.createdAt).toLocaleDateString()}</td>
                         <td className="p-2">
                             <div className="flex gap-2">

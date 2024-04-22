@@ -66,7 +66,7 @@ export function Sidebar() {
         className="flex items-center justify-center gap-2 text-xl px-2 mt-6 mb-10"
       >
         <Image src="/logo.png" alt="Plan Agro Logo" width={25} height={0} />
-        <span>
+        <span className="text-white">
           Plan<b>Agro</b>
         </span>
       </div>
