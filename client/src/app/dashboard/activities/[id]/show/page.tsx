@@ -1,5 +1,6 @@
 "use client";
 import Loading from "@/components/commons/loading";
+import PolyLocationSelector from "@/components/map/PolygonLocationSelector";
 import { useUser } from "@/contexts/UserContext";
 import { Activity } from "@/interfaces/activity.interface";
 import { Field } from "@/interfaces/field.interface";
@@ -77,6 +78,20 @@ return (
                         <MapIcon className="h-6 w-6 text-blue-500" />
                     </a>
                 </p>
+            </div>
+            <div className="mt-4">
+                {
+                    activity ? (
+                        <PolyLocationSelector
+                            initialCoords={(activity.targetField as Field).coords}
+                            readOnly={true}
+                            
+                        ></PolyLocationSelector>
+
+                    ) : (
+                        <Loading />
+                    )
+                }
             </div>
         </div>
     </div>
