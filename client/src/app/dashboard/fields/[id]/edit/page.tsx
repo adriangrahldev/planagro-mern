@@ -17,14 +17,16 @@ const EditFieldPage = () => {
   const { user } = useUser();
 
   const onSubmitEdit = async (event: FormEvent) => {
+    event.preventDefault();
     try {
       const data = new FormData(event.target as HTMLFormElement);
       const fieldData = {
         name: data.get("name") as string,
         surface: parseFloat(data.get("surface") as string),
-        latitude: data.get("latitude") as string,
-        longitude: data.get("longitude") as string,
+        coords: JSON.parse(data.get("coords") as string),
       };
+      console.log(fieldData);
+      
       FieldService.updateField(id, fieldData, user?.authToken || "")
         .then((field) => {
           setField(field);
