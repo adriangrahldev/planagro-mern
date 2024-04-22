@@ -22,18 +22,18 @@ export const ActivitiesTable = ({activities, handleDelete}:{activities:Activity[
             <tbody>
                 {activities.map((activity, index) => (
                     <tr key={index}>
-                        <td className="py-2">{activity.title}</td>
-                        <td className="py-2">{activity.description}</td>
-                        <td className="py-2">
+                        <td className="p-2">{activity.title}</td>
+                        <td className="p-2">{activity.description}</td>
+                        <td className="p-2">
                             {new Date(activity.date.split("T")[0]+" 12:00:00").toLocaleDateString()}
                         </td>
-                        <td className="py-2">
-                            <span className={`px-2 py-1 text-gray-600 ${activity.status === 'pending' ? 'bg-yellow-200' : 'bg-green-400'} text-sm font-semibold rounded-md shadow`}>
+                        <td className="p-2">
+                            <span className={`px-2 py-1 ${activity.status === 'pending' ? 'bg-yellow-200 text-gray-600 ' : 'bg-green-400 text-white'} text-sm font-semibold rounded-md shadow`}>
                                 {activity.status === 'pending' ? 'PENDIENTE' : 'COMPLETADO'}
                             </span>                        
                         </td>
-                        <td className="py-2">{(activity.targetField as Field)?.name}</td>
-                        <td className="py-2">
+                        <td className="p-2">{(activity.targetField as Field)?.name}</td>
+                        <td className="p-2">
                             <div className="flex gap-2">
 
                                 <Link href={`/dashboard/activities/${activity._id}/show`} className="bg-green-400 p-2 rounded-full">
