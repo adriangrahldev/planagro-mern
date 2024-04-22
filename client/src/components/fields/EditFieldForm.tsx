@@ -1,7 +1,8 @@
+"use client"
 import { FormEvent, useState } from "react";
-import LocationSelector from "../map/LocationSelector";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Field } from "@/interfaces/field.interface";
+import PolyLocationSelector from "../map/PolygonLocationSelector";
 
 interface EditFieldFormProps {
   field: Field,
@@ -15,24 +16,13 @@ const EditFieldForm = ({
   
   const [fieldName, setFieldName] = useState(field.name);
   const [fieldSurface, setFieldSurface] = useState(field.surface);
-  const [fieldLatitude, setFieldLatitude] = useState(field.latitude);
-  const [fieldLongitude, setFieldLongitude] = useState(field.longitude);
-
-
-  const handleSubmitEdit = (data: FormEvent) => {
-    data.preventDefault();
-    if (!fieldLatitude || !fieldLongitude) {
-      alert("Por favor, selecciona una ubicación en el mapa");
-    } else {
-      onSubmitEdit(data);
-    }
-  };
+  const [fieldCoords, setFieldCoords] = useState(field.coords);
 
   return (
     <form
       className="edit-field-form flex flex-col gap-2"
       onSubmit={(e) => {
-        handleSubmitEdit(e);
+        onSubmitEdit(e);
       }}
     >
       <div className="flex gap-4">
@@ -74,15 +64,19 @@ const EditFieldForm = ({
         <label htmlFor="latitude" className="font-semibold">
           Ubicación
         </label>
-        <input type="text" name="longitude" hidden value={fieldLongitude} />
-        <input type="text" name="latitude" hidden value={fieldLatitude} />
-        <LocationSelector
-          latitude={fieldLatitude}
-          longitude={fieldLongitude}
-          setLatitude={setFieldLatitude}
-          setLongitude={setFieldLongitude}
-          readOnly={false}
-        />
+        <input type="text" name="coords" hidden onChange={
+          (e) => setFieldCoords(JSON.parse(e.target.value))
+        } value={JSON.stringify(fieldCoords || "[]")}/>
+        {
+          fieldCoords.length > 0 ?
+          <PolyLocationSelector
+          setNewCoords={setFieldCoords}
+          initialCoords={fieldCoords}
+            readOnly={false}
+          /> :
+          <p>Cargando mapa...</p>
+        }
+
       </div>
       <div>
         <button
