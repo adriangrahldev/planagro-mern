@@ -1,6 +1,7 @@
 "use client";
 import Loading from "@/components/commons/loading";
 import LocationSelector from "@/components/map/LocationSelector";
+import PolyLocationSelector from "@/components/map/PolygonLocationSelector";
 import { useUser } from "@/contexts/UserContext";
 import { Activity } from "@/interfaces/activity.interface";
 import { Field } from "@/interfaces/field.interface";
@@ -52,7 +53,7 @@ return (
                 </div>
                 <div>
                     <p className="text-gray-500 font-semibold">Ubicación</p>
-                    <LocationSelector latitude={field.latitude} longitude={field.longitude} readOnly={true}/>
+                    <PolyLocationSelector initialCoords={field.coords} readOnly={true}/>
                 </div>
             </div>
             
